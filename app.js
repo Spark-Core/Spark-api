@@ -8,6 +8,7 @@ app.listen(3040)
 app.use((req, res, next) => {
     // To make sure browsers don't block content.
     res.set("Access-Control-Allow-Origin", '*')
+    res.set("content-type", "application/json")
     next()
 })
 
