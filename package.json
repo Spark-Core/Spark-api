@@ -1,0 +1,25 @@
+{
+  "name": "spark-api",
+  "version": "1.0.0",
+  "description": "Server software to quickly serve small data for Spark framework bots.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sparkbots/Spark-api.git"
+  },
+  "author": "Sparkbots (https://github.com/Sparkbots)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sparkbots/Spark-api/issues"
+  },
+  "homepage": "https://github.com/Sparkbots/Spark-api#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "moment": "^2.22.0",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
+  }
+}
