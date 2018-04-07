@@ -1,7 +1,7 @@
 var time = 0
 var data = {}
 var moment = require("moment")
-const request = require("request")
+const request = require("request-promise")
 var modified = new moment().format("ddd, DD MMM YYYY HH:mm:ss GMT")
 module.exports = (app) => {
     app.get("/stats", async (req, res) => {
@@ -38,7 +38,6 @@ module.exports = (app) => {
         })
 
         var version = releases.filter(i => (i.draft == false))[0].tag_name.replace("v", "")
-        console.log(releases)
         time = (curr.getTime() + 180000)
         data = {
             github,
