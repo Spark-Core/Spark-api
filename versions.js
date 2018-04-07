@@ -2,6 +2,11 @@ var moment = require("moment")
 var fs = require("fs")
 var versions = {
     all: [{
+            version: "0.1.0-beta.0",
+            release_date: new Date(1523050041000).toUTCString(),
+            release: false
+        },
+        {
             version: "0.0.6",
             release_date: new Date(1516130128000).toUTCString(),
             release: true
@@ -85,7 +90,7 @@ var versions = {
             version: "0.0.1",
             release_date: new Date(1503944919000).toUTCString(),
             release: true
-        }
+        },
 
     ],
     stable: {
@@ -93,8 +98,8 @@ var versions = {
         release_date: new Date().toUTCString()
     },
     beta: {
-        version: "0.1.0-beta",
-        release_date: new Date().toUTCString()
+        version: "0.1.0-beta.0",
+        release_date: new Date(1523050041000).toUTCString()
     }
 }
 var modified = new moment().format("ddd, DD MMM YYYY HH:mm:ss [GMT]")
