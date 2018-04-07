@@ -1,6 +1,7 @@
 var time = 0
 var data = {}
 var moment = require("moment")
+const request = require("request")
 var modified = new moment().format("ddd, DD MMM YYYY HH:mm:ss GMT")
 module.exports = (app) => {
     app.get("/stats", async (req, res) => {
