@@ -60,10 +60,15 @@ function next(req, res) {
         embed.setColor(0xedde3f)
     } else if (req.buildInfo.state == "passed") {
         embed.setTitle("Build #" + req.buildInfo.number + " has completed succesfully.")
-        var time = moment.duration(req.buildInfo.duration, "seconds").format("hh:mm:ss", {
-            trim: false
-        });
-        embed.setDescription("Duration: \n**" + time + "**")
+        try {
+            var time = moment.duration(req.buildInfo.duration, "seconds").format("hh:mm:ss", {
+                trim: false
+            });
+            embed.setDescription("Duration: \n**" + time + "**")
+        } catch (e) {
+            console.log("Couldn't parse duration")
+            embed.setDescription("Couldn't parse duration.")
+        }
         embed.setColor(0x39aa56)
     } else if (req.buildInfo.state == "failed") {
         embed.setTitle("Build #" + req.buildInfo.number + " has failed.")
