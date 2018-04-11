@@ -6,7 +6,6 @@ require("request")
 const crypto = require("crypto")
 const fs = require("fs")
 const moment = require("moment")
-require("moment-duration-format")
 
 module.exports = async (req, res) => {
     if (!req.body.payload) {
@@ -61,13 +60,12 @@ function next(req, res) {
     } else if (req.buildInfo.state == "passed") {
         embed.setTitle("Build #" + req.buildInfo.number + " has completed succesfully.")
         try {
-            var time = moment.duration(req.buildInfo.duration, "seconds").format("hh:mm:ss", {
-                trim: false
-            });
+            var duration = moment.duration(req.buildInfo.duration, "seconds")
+            var time = Math.floor(duration.asHours()) + moment.utc(duration.asMilliseconds()).format(":mm:ss")
             embed.setDescription("Duration: \n**" + time + "**")
         } catch (e) {
-            console.log("Couldn't parse duration")
-            embed.setDescription("Couldn't parse duration.")
+            console.log("Couldn't parse duration value.", e)
+            embed.setDescription("Couldn't parse duration value.")
         }
         embed.setColor(0x39aa56)
     } else if (req.buildInfo.state == "failed") {
