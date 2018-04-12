@@ -80,7 +80,7 @@ function next(req, res) {
         embed.setTitle("Invalid state (" + req.buildInfo.state + ")")
         embed.setDescription("Please see the console for more information.")
     }
-    embed.addField("Links", "[Commit **" + req.buildInfo.commit.substring(0, 6) + "**](https://github.com/" + req.buildInfo.repository.owner_name + "/" + req.buildInfo.repository.name + "/" + req.buildInfo.commit + ")\n[Compare](" + req.buildInfo.compare_url + ")\n[Build info](" + req.buildInfo.build_url + ")\n[Github repo](https://github.com/" +
+    embed.addField("Links", "[Commit **" + req.buildInfo.commit.substring(0, 6) + "**](https://github.com/" + req.buildInfo.repository.owner_name + "/" + req.buildInfo.repository.name + "/commit/" + req.buildInfo.commit + ")\n[Compare](" + req.buildInfo.compare_url + ")\n[Build info](" + req.buildInfo.build_url + ")\n[Github repo](https://github.com/" +
         req.buildInfo.repository.owner_name + "/" + req.buildInfo.repository.name + ")")
     hook.send("", {
             embeds: [embed]
