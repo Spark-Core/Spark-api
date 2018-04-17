@@ -23,6 +23,9 @@ require("./stats.js")(app)
 // Load versions path
 require("./versions.js")(app)
 
+// Load badges.
+require("./badges.js")(app)
+
 // Set travis webhooks up.
 app.post("/travis", (require("./travis.js")))
 

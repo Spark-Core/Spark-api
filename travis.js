@@ -4,7 +4,6 @@ const hook = new discord.WebhookClient(options.hookId, options.hookToken);
 const request = require("request-promise")
 require("request")
 const crypto = require("crypto")
-const fs = require("fs")
 const moment = require("moment")
 
 module.exports = async (req, res) => {

@@ -111,14 +111,14 @@ try {
         beta: [],
         stable: []
     }
-    fs.writeFile(__dirname + "/ids.json", JSON.stringify(data), {
+    fs.writeFileSync(__dirname + "/ids.json", JSON.stringify(data), {
         encoding: "utf8"
     })
 
 }
 
 function update(data) {
-    fs.writeFile(__dirname + "/ids.json", JSON.stringify(data), {
+    fs.writeFileSync(__dirname + "/ids.json", JSON.stringify(data), {
         encoding: "utf8"
     })
 }

@@ -37,7 +37,7 @@ module.exports = (app) => {
             json: true
         })
 
-        var version = releases.filter(i => (i.draft == false))[0].tag_name.replace("v", "")
+        var version = releases.filter(i => (i.draft == false)).filter(i => (i.prerelease == false))[0].tag_name.replace("v", "")
         time = (curr.getTime() + 180000)
         data = {
             github,
