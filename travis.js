@@ -52,12 +52,12 @@ function next(req, res) {
         embed.setFooter("Push (" + req.buildInfo.commit + ")", "https://cdn.discordapp.com/attachments/347923404357107712/433673144218419210/commit-128.png")
     }
     if (req.buildInfo.state == "started") {
-        embed.setTitle("Build #" + req.buildInfo.number + " has started!")
+        embed.setTitle("Build #" + req.buildInfo.number + " has started! | Repository: " + req.buildInfo.repository.name)
         message = req.buildInfo.message.substring(0, 2000)
         embed.setDescription("Commit body:\n" + message)
         embed.setColor(0xedde3f)
     } else if (req.buildInfo.state == "passed") {
-        embed.setTitle("Build #" + req.buildInfo.number + " has completed succesfully.")
+        embed.setTitle("Build #" + req.buildInfo.number + " has completed succesfully. | Repository: " + req.buildInfo.repository.name)
         try {
             var duration = moment.duration(req.buildInfo.duration, "seconds")
             var time = Math.floor(duration.asHours()) + moment.utc(duration.asMilliseconds()).format(":mm:ss")
@@ -68,15 +68,15 @@ function next(req, res) {
         }
         embed.setColor(0x39aa56)
     } else if (req.buildInfo.state == "failed") {
-        embed.setTitle("Build #" + req.buildInfo.number + " has failed.")
+        embed.setTitle("Build #" + req.buildInfo.number + " has failed. | Repository: " + req.buildInfo.repository.name)
         embed.setDescription("Check [your console](" + req.buildInfo.build_url + ") for errors")
         embed.setColor(0xdb4545)
     } else if (req.buildInfo.state == "canceled") {
-        embed.setTitle("Build #" + req.buildInfo.number + " has been canceled.")
+        embed.setTitle("Build #" + req.buildInfo.number + " has been canceled. | Repository: " + req.buildInfo.repository.name)
         embed.setDescription("This build has been canceled.")
         embed.setColor(0x9d9d9d)
     } else {
-        embed.setTitle("Invalid state (" + req.buildInfo.state + ")")
+        embed.setTitle("Invalid state (" + req.buildInfo.state + ") | Repository: " + req.buildInfo.repository.name)
         embed.setDescription("Please see the console for more information.")
     }
     embed.addField("Links", "[Commit **" + req.buildInfo.commit.substring(0, 6) + "**](https://github.com/" + req.buildInfo.repository.owner_name + "/" + req.buildInfo.repository.name + "/commit/" + req.buildInfo.commit + ")\n[Compare](" + req.buildInfo.compare_url + ")\n[Build info](" + req.buildInfo.build_url + ")\n[Github repo](https://github.com/" +
