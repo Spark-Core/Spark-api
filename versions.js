@@ -128,42 +128,23 @@ module.exports = (app) => {
         res.set("Last-Modified", modified)
         var discord = false;
         if (req.query.ownerID && !isNaN(req.query.ownerID)) {
-            if (req.query.version == versions.stable.version) {
-                if (new Date().getTime() >= (new Date(versions.stable.release_date).getTime() + 43200000)) {
-                    if (data.stable.length > 0) {
-                        data.stable = []
-                        update(data)
-
-                    }
-                }
-                if (data.stable.includes(req.query.ownerID)) {
-                    discord = true;
-                } else {
-                    data.stable.push(req.query.ownerID)
-                    update(data)
-                }
-                versions.discord = discord;
-            } else if (req.query.version == versions.beta.version) {
-                if (new Date().getTime() >= (new Date(versions.beta.release_date).getTime() + 43200000)) {
-                    if (data.beta.length > 0) {
-                        data.beta = []
-                        update(data)
-
-                    }
-                }
-                if (data.beta.includes(req.query.ownerID)) {
-                    discord = true;
-                } else {
-                    data.beta.push(req.query.ownerID)
-                    update(data)
-                }
-                versions.discord = discord;
-            } else {
-                delete versions.discord
+            var type = "stable";
+            if (req.query.version.includes("beta")) {
+                type = "beta"
             }
-        } else {
-            delete versions.discord
+            if (versions[type].version !== req.query.version && JSON.stringify(versions.all).includes(req.query.version)) { /* Don't trigger if the beta version isn't released yet.*/
+                if (!data[type].includes(req.query.ownerID + " - " + req.query.version)) {
+                    data[type].push(req.query.ownerID + " - " + req.query.version)
+                    update(data)
+                    discord = true
+                }
+
+            }
+            if (req.query.version != null) {
+                versions.discord = discord;
+            }
         }
+
         res.send(JSON.stringify(versions))
     })
 }
