@@ -2,6 +2,7 @@ var time = 0
 var data = {}
 var moment = require("moment")
 const request = require("request-promise")
+const config = require("./webhook-options.json")
 var modified = new moment().format("ddd, DD MMM YYYY HH:mm:ss GMT")
 module.exports = (app) => {
     app.get("/stats", async (req, res) => {
@@ -30,7 +31,7 @@ module.exports = (app) => {
         })
         github = github.stargazers_count;
         var releases = await request({
-            uri: "https://api.github.com/repos/TobiasFeld22/Spark/releases",
+            uri: "https://api.github.com/repos/TobiasFeld22/Spark/releases?client_id=" + config.ghid + "&client_secret=" + config.ghsecret,
             headers: {
                 "User-Agent": "Sparkbots"
             },

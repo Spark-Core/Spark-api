@@ -26,6 +26,9 @@ require("./versions.js")(app)
 // Load badges.
 require("./badges.js")(app)
 
+// Load notifications
+require("./notifications.js")(app)
+
 // Set travis webhooks up.
 app.post("/travis", (require("./travis.js")))
 
