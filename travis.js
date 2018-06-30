@@ -52,12 +52,12 @@ function next(req, res) {
         embed.setFooter("Push (" + req.buildInfo.commit + ")", "https://cdn.discordapp.com/attachments/347923404357107712/433673144218419210/commit-128.png")
     }
     if (req.buildInfo.state == "started") {
-        embed.setTitle("Build #" + req.buildInfo.number + " has started! | Repository: " + req.buildInfo.repository.name)
+        embed.setAuthor("Build #" + req.buildInfo.number + " has started! | Repository: " + req.buildInfo.repository.name, "https://cdn.discordapp.com/attachments/347923404357107712/462750913832943616/68747470733a2f2f7472617669732d63692e636f6d2f696d616765732f7374726f6b652d69636f6e732f69636f6e2d72756e.png", req.buildInfo.build_url)
         message = req.buildInfo.message.substring(0, 2000)
         embed.setDescription("Commit body:\n" + message)
         embed.setColor(0xedde3f)
     } else if (req.buildInfo.state == "passed") {
-        embed.setTitle("Build #" + req.buildInfo.number + " has completed succesfully. | Repository: " + req.buildInfo.repository.name)
+        embed.setAuthor("Build #" + req.buildInfo.number + " has completed succesfully. | Repository: " + req.buildInfo.repository.name, "https://cdn.discordapp.com/attachments/347923404357107712/462752187135557645/check.png", req.buildInfo.build_url)
         try {
             var duration = moment.duration(req.buildInfo.duration, "seconds")
             var time = Math.floor(duration.asHours()) + moment.utc(duration.asMilliseconds()).format(":mm:ss")
@@ -68,7 +68,7 @@ function next(req, res) {
         }
         embed.setColor(0x39aa56)
     } else if (req.buildInfo.state == "failed") {
-        embed.setTitle("Build #" + req.buildInfo.number + " has failed. | Repository: " + req.buildInfo.repository.name)
+        embed.setAuthor("Build #" + req.buildInfo.number + " has failed. | Repository: " + req.buildInfo.repository.name, "https://cdn.discordapp.com/attachments/347923404357107712/462752914369150986/cross.png", req.buildInfo.build_url)
         embed.setDescription("Check [your console](" + req.buildInfo.build_url + ") for errors")
         embed.setColor(0xdb4545)
     } else if (req.buildInfo.state == "canceled") {
