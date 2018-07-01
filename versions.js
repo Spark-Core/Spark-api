@@ -98,7 +98,7 @@ var versions = {
         },
         {
             version: "0.0.1",
-            release_date: new Date(1503944919000).toUTCString(),
+            release_date: new Date(1530450280000).toUTCString(),
             release: true
         },
 
